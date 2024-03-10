@@ -1,5 +1,7 @@
 import React, { useRef } from 'react'
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
 
 const SignUp = () => {
 
@@ -7,6 +9,7 @@ const SignUp = () => {
     const password = useRef();
     const ConfirmPassword = useRef();
     const navigate = useNavigate()
+    const dispatch = useDispatch();
 
     const submitHandler =(e)=>{
         e.preventDefault();
@@ -37,8 +40,13 @@ const SignUp = () => {
         }
 
         sendData(mail.current.value,password.current.value);
+        dispatch()
         navigate("/login")
 
+    }
+
+    const loginHandler = ()=>{
+        navigate("/login")
     }
   return (
     <div className='flex flex-col  mx-auto'>
@@ -56,6 +64,7 @@ const SignUp = () => {
            Confirm-Password :
             <input className='px-2 py-1 rounded-sm bg-opacity-10 bg-slate-500' type='password' ref={ConfirmPassword} placeholder='Re-enter password...' />
         </label>
+        <h4 onClick={loginHandler} >Login</h4>
         <button className='bg-slate-900 text-white px-2 py-1 mt-3 rounded-md' type='submit'>Submit</button>
       </form>
     </div>

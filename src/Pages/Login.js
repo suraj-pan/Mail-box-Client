@@ -1,11 +1,14 @@
 import React, { useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
+import {login} from '../store/Auth'
+import { useDispatch } from 'react-redux';
 
 const Login = () => {
 
     const mail = useRef();
     const password = useRef();
     const navigate = useNavigate()
+    const dispatch = useDispatch();
 
     const SignUpHandler =()=>{
         navigate("/signUp")
@@ -30,13 +33,18 @@ const Login = () => {
             const data = await response.json();
 
             console.log(data)
+
+            dispatch(login(data.idToken))
           } catch (error) {
             console.log("error",error)
           }
 
+          navigate("/dashboard")
+
         }
 
         sendData(mail.current.value,password.current.value)
+        
     }
 
 
