@@ -7,7 +7,7 @@ const Login = () => {
 
     const mail = useRef();
     const password = useRef();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const SignUpHandler =()=>{
@@ -18,6 +18,8 @@ const Login = () => {
         e.preventDefault();
 
         const sendData = async(mail,password)=>{
+
+          const emailPart = mail.split("@")[0];
           try {
             const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDqssr-XYkQE5aR15B7bVhhygLUnqGrHbc`,{
                 method:"POST",
@@ -33,8 +35,9 @@ const Login = () => {
             const data = await response.json();
 
             console.log(data)
+            const token =data.idToken
 
-            dispatch(login(data.idToken))
+            dispatch(login({emailPart,token}))
           } catch (error) {
             console.log("error",error)
           }
@@ -44,6 +47,7 @@ const Login = () => {
         }
 
         sendData(mail.current.value,password.current.value)
+       
         
     }
 

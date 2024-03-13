@@ -3,6 +3,8 @@ import "./App.css";
 import SignUp from "./Pages/SignUp";
 import Login from "./Pages/Login";
 import Dashboard from "./Pages/Dashboard";
+import Compose from "./Pages/Compose";
+
 
 function App() {
 
@@ -13,6 +15,7 @@ function App() {
         <Routes>
         <Route path="/" Component={SignUp}  />
         <Route path="/login" Component={Login}  />
+        <Route path="/compose" Component={Compose}  />
         <Route path="/dashboard" Component={Dashboard}  />
         </Routes>
       </BrowserRouter>
