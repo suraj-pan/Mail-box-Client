@@ -2,13 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState, convertToRaw } from 'draft-js';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useHistory  } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
 
   const navigate = useNavigate()
   const [Data,setData] = useState([]);
+  const history = useHistory()
  
   const userEmail = useSelector((state)=>state.auth.email)
   console.log(userEmail)
@@ -31,16 +32,21 @@ const Dashboard = () => {
       getEmailData()
   },[])
 
+  const dataHandler =(id)=>{
+    history.push('/mailContainer', { itemData: id });
+  }
+
   return (
     <div>
     <h2>  Welcome to the Mail client box</h2>
     <button onClick={composeHandler} >Compose</button>
     <div>
     {Data.map((item,index)=>(
-      <div key={item.id} >
+      <div key={item.id} className='flex justify-between w-[500px]' onClick={(item)=>dataHandler(item.id)} >
+        
         <div>{item.email}</div>
         <div>{item.subject}</div>
-        <div>{item.data}</div>
+
       </div>
     ))}
     </div>

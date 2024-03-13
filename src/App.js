@@ -4,6 +4,7 @@ import SignUp from "./Pages/SignUp";
 import Login from "./Pages/Login";
 import Dashboard from "./Pages/Dashboard";
 import Compose from "./Pages/Compose";
+import MailContainer from "./Pages/MailContainer";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/login" Component={Login}  />
         <Route path="/compose" Component={Compose}  />
         <Route path="/dashboard" Component={Dashboard}  />
+        <Route path="/mailContainer" Component={MailContainer}  />
         </Routes>
       </BrowserRouter>
     </div>
