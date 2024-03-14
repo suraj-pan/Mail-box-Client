@@ -7,7 +7,7 @@ const Dashboard = () => {
 
   const navigate = useNavigate()
   const [Data, setData] = useState([]);
-  const [clickItem, setClickItem] = useState(new Set());
+  const [clickItem, setClickItem] = useState(true);
   console.log(clickItem)
 
 
@@ -35,33 +35,45 @@ const Dashboard = () => {
   const dataHandler = (id) => {
     console.log(id)
     navigate("/mailContainer", { state: { itemId: id } })
+    setClickItem(false)
   }
 
-console.log(Data.length)
+  console.log(Data.length)
 
+  const deleteHandler = async (id) => {
+    console.log(id)
+    const response = await fetch(`https://expense-tracker-65763-default-rtdb.firebaseio.com/mailBox/${userEmail}/${id}.json`,{
+      method:'DELETE'
+    });
+    console.log(response)
+    // yeh dusra pe navigate ho raha hai.. issue hai
+    navigate("/dashboard")
+  }
   return (
     <div className="mx-auto flex flex-col max-w-screen-lg p-8 relative">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-3xl font-bold">Welcome to the Mail client box</h2>
         {/* <button onClick={handleClose} className=" ml-5 text-red-500">Close</button> */}
       </div>
-      <button onClick={composeHandler} className=" right-[-100px] absolute bg-blue-500 text-white py-2 px-4 rounded">Compose</button>
+         <button onClick={composeHandler} className=" right-[-100px] absolute bg-blue-500 text-white py-2 px-4 rounded">Compose</button>
       <div className="mt-8 ">
-        {Data.length === 0 ?(<p className='text-slate-300 font-bold text-2xl' >No emails have been sent or received</p>):(Data.map((item, index) => (
+        {Data.length === 0 ? (<p className='text-slate-300 font-bold text-2xl' >No emails have been sent or received</p>) : (Data.map((item, index) => (
           <div
             key={item.id}
-            className={`flex gap-3 mb-2 cursor-pointer justify-between p-4 border border-black ${clickItem.has(item.id) ? "bg-red-100" : "bg-blue-100"} rounded`}
+            // blue dot show nahi ho rha hai
+            className={`flex gap-3 mb-2 cursor-pointer bg-slate-400 justify-between p-4 border border-black rounded-md  fill-blue-300 `}
             onClick={() => dataHandler(item)}
           >
             <div>{item.email}</div>
             <div>{item.subject}</div>
+            <button onClick={()=>deleteHandler(item.id)} className='bg-slate-500 text-white rounded-md px-2' >Delete</button>
           </div>
         )))}
       </div>
-    
 
 
-   
+
+
     </div >
   )
 }

@@ -11,6 +11,7 @@ const Header = () => {
 
   const handleLogout =()=>{
     dispatch(logout())
+    /// navigate issue hai
     navigate("/login")
   }
   return (
