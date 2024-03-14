@@ -23,7 +23,7 @@ const auth = createSlice({
            state.email = null;
             state.token = null;
             state.isAuthenticated=false;
-            console.log(action.payload)
+            console.log("logout ho gaya hai..")
         }
     }
 })

@@ -5,6 +5,7 @@ import Login from "./Pages/Login";
 import Dashboard from "./Pages/Dashboard";
 import Compose from "./Pages/Compose";
 import MailContainer from "./Pages/MailContainer";
+import Header from "./components/Header";
 
 
 function App() {
@@ -12,7 +13,9 @@ function App() {
   
   return (
     <div className="mx-auto w-[90%] max-h-full flex flex-col ">
+ 
       <BrowserRouter>
+      <Header/>
         <Routes>
         <Route path="/" Component={SignUp}  />
         <Route path="/login" Component={Login}  />

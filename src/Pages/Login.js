@@ -54,22 +54,20 @@ const Login = () => {
 
 
   return (
-    <div className='flex flex-col  mx-auto'>
+    <div className='flex flex-col mx-auto'>
     <h2 className='text-3xl font-bold'>Login Form</h2>
     <form onSubmit={submitHandler} className='flex flex-col justify-center items-center bg-slate-200 mt-9 w-[300px] h-[600px] rounded-lg'>
       <label className='flex flex-col text-lg mt-4'>
-          E-mail :
-          <input className='px-2 py-1 rounded-sm bg-opacity-10 bg-slate-500' type='mail' ref={mail} placeholder='Enter your name...' />
+        E-mail:
+        <input className='px-2 py-1 rounded-sm bg-opacity-10 bg-slate-500' type='email' ref={mail} placeholder='Enter your email...' />
       </label>
       <label className='flex flex-col text-lg'>
-          Password :
-          <input className='px-2 py-1 rounded-sm bg-opacity-10 bg-slate-500' type='password' ref={password} placeholder='Enter your password...' />
+        Password:
+        <input className='px-2 py-1 rounded-sm bg-opacity-10 bg-slate-500' type='password' ref={password} placeholder='Enter your password...' />
       </label>
-     
       <button className='bg-slate-900 text-white px-2 py-1 mt-3 rounded-md' type='submit'>Submit</button>
-      <h4>Need a account? <span className='text-white' onClick={SignUpHandler}>Sign-Up</span></h4>
+      <h4 className='mt-2 text-white'>Need an account? <span className='text-blue-500 cursor-pointer' onClick={SignUpHandler}>Sign Up</span></h4>
     </form>
-
   </div>
   )
 }
