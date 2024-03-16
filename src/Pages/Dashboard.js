@@ -30,8 +30,13 @@ const Dashboard = () => {
 
   }
 
-  useEffect(() => {
+   useEffect(() => {
     getEmailData()
+
+    const intervalId = setInterval(getEmailData, 2000);
+
+    // Clean up function to clear the interval when component unmounts
+    return () => clearInterval(intervalId)
   }, [])
 
   const dataHandler = (id) => {
