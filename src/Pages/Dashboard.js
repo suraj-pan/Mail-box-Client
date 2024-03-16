@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { Sidebar } from 'flowbite-react';
+
 
 const Dashboard = () => {
 
@@ -55,6 +57,33 @@ const Dashboard = () => {
         <h2 className="text-3xl font-bold">Welcome to the Mail client box</h2>
         {/* <button onClick={handleClose} className=" ml-5 text-red-500">Close</button> */}
       </div>
+      {/* <Sidebar aria-label="Default sidebar example">
+      <Sidebar.Items>
+        <Sidebar.ItemGroup>
+          <Sidebar.Item href="#" icon={HiChartPie}>
+            Dashboard
+          </Sidebar.Item>
+          <Sidebar.Item href="#" icon={HiViewBoards} label="Pro" labelColor="dark">
+            Kanban
+          </Sidebar.Item>
+          <Sidebar.Item href="#" icon={HiInbox} label="3">
+            Inbox
+          </Sidebar.Item>
+          <Sidebar.Item href="#" icon={HiUser}>
+            Users
+          </Sidebar.Item>
+          <Sidebar.Item href="#" icon={HiShoppingBag}>
+            Products
+          </Sidebar.Item>
+          <Sidebar.Item href="#" icon={HiArrowSmRight}>
+            Sign In
+          </Sidebar.Item>
+          <Sidebar.Item href="#" icon={HiTable}>
+            Sign Up
+          </Sidebar.Item>
+        </Sidebar.ItemGroup>
+      </Sidebar.Items>
+    </Sidebar> */}
          <button onClick={composeHandler} className=" right-[-100px] absolute bg-blue-500 text-white py-2 px-4 rounded">Compose</button>
       <div className="mt-8 ">
         {Data.length === 0 ? (<p className='text-slate-300 font-bold text-2xl' >No emails have been sent or received</p>) : (Data.map((item, index) => (

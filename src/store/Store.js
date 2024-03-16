@@ -1,6 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import AuthReducer from './Auth'
+import MailReducer from './Mail'
 
 export const Store = configureStore({
-   reducer:{ auth:AuthReducer}
+   reducer:{ auth:AuthReducer,
+      mail:MailReducer},
+
 })

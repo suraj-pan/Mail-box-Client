@@ -19,6 +19,7 @@ const Header = () => {
       <NavLink to="/login">Login</NavLink>
       <NavLink to="/">Signup</NavLink>
       <NavLink to="/dashboard">Dashboard</NavLink>
+      <NavLink to="/sentMail">Outbox</NavLink>
       <NavLink onClick={handleLogout} >logout</NavLink>
     </div>
   );

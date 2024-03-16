@@ -2,16 +2,19 @@ import React, { useRef, useState ,useEffect} from 'react';
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState } from 'draft-js';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { convertToRaw } from 'draft-js';
 import { convertToHTML} from 'draft-convert';
+import {sentMail} from '../store/Mail';
 
 const Compose = () => {
 
     const mail = useRef();
     const subject = useRef();
     const text = useRef();
+    const dispatch = useDispatch();
+
     const userEmail = useSelector((state)=>state.auth.email)
     console.log(userEmail)
     const navigate = useNavigate()
@@ -47,8 +50,9 @@ const Compose = () => {
         })
   
         const data = await response.json();
-        console.log(data)
-  
+        // console.log(data)
+        console.log("sent mail jo bhejna hai",email,subject,content)
+        dispatch(sentMail({email,subject,content}))
   
         // save to send email id user
         const response2 = await fetch(`https://expense-tracker-65763-default-rtdb.firebaseio.com/mailBox/${emailPart}.json`, {

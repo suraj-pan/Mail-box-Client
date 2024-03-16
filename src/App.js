@@ -6,6 +6,7 @@ import Dashboard from "./Pages/Dashboard";
 import Compose from "./Pages/Compose";
 import MailContainer from "./Pages/MailContainer";
 import Header from "./components/Header";
+import Outbox from "./Pages/Outbox";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/compose" Component={Compose}  />
         <Route path="/dashboard" Component={Dashboard}  />
         <Route path="/mailContainer" Component={MailContainer}  />
+        <Route path="/sentMail" Component={Outbox}  />
         </Routes>
       </BrowserRouter>
     </div>
