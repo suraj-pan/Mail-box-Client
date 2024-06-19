@@ -9,6 +9,7 @@ const Mail = createSlice({
     name:"mail",
     initialState,
     reducers:{
+        /// same login sabko dikh raha
         sentMail:(state,action)=>{
                 // console.log(action.payload);
                 const {email,subject,content} = action.payload;

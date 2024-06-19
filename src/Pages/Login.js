@@ -32,17 +32,26 @@ const Login = () => {
                     returnSecureToken:true
                 })
             });
+
+           
+            if(!response.ok){
+                const errorData = await response.json();
+                throw new Error(errorData.error.message)
+            }
             const data = await response.json();
 
-            console.log(data)
+         
             const token =data.idToken
 
             dispatch(login({emailPart,token}))
+
+            navigate("/dashboard")
           } catch (error) {
             console.log("error",error)
+            window.alert(`Login failed: ${error }`);
           }
 
-          navigate("/dashboard")
+       
 
         }
 
@@ -54,21 +63,41 @@ const Login = () => {
 
 
   return (
-    <div className='flex flex-col mx-auto'>
-    <h2 className='text-3xl font-bold'>Login Form</h2>
-    <form onSubmit={submitHandler} className='flex flex-col justify-center items-center bg-slate-200 mt-9 w-[300px] h-[600px] rounded-lg'>
-      <label className='flex flex-col text-lg mt-4'>
-        E-mail:
-        <input className='px-2 py-1 rounded-sm bg-opacity-10 bg-slate-500' type='email' ref={mail} placeholder='Enter your email...' />
-      </label>
-      <label className='flex flex-col text-lg'>
-        Password:
-        <input className='px-2 py-1 rounded-sm bg-opacity-10 bg-slate-500' type='password' ref={password} placeholder='Enter your password...' />
-      </label>
-      <button className='bg-slate-900 text-white px-2 py-1 mt-3 rounded-md' type='submit'>Submit</button>
-      <h4 className='mt-2 text-white'>Need an account? <span className='text-blue-500 cursor-pointer' onClick={SignUpHandler}>Sign Up</span></h4>
+    <div className='flex flex-col items-center justify-center mx-auto'>
+    <h2 className='text-3xl font-bold mb-4'>Login Form</h2>
+    <form onSubmit={submitHandler} className='flex flex-col items-center bg-gray-200 mt-9 w-[300px] h-[400px] rounded-lg shadow-lg'>
+        <label className='flex flex-col text-lg mt-4'>
+            E-mail:
+            <input
+                className='px-3 py-2 mt-1 rounded-md bg-opacity-10 bg-gray-500 focus:outline-none focus:bg-white'
+                type='email'
+                ref={mail}
+                placeholder='Enter your email...'
+            />
+        </label>
+        <label className='flex flex-col text-lg mt-4'>
+            Password:
+            <input
+                className='px-3 py-2 mt-1 rounded-md bg-opacity-10 bg-gray-500 focus:outline-none focus:bg-white'
+                type='password'
+                ref={password}
+                placeholder='Enter your password...'
+            />
+        </label>
+        <button className='bg-blue-500 text-white px-4 py-2 mt-6 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600'>
+            Submit
+        </button>
+        <h4 className='mt-4 text-gray-700'>
+            Need an account?{' '}
+            <span
+                className='text-blue-500 cursor-pointer hover:underline'
+                onClick={SignUpHandler}
+            >
+                Sign Up
+            </span>
+        </h4>
     </form>
-  </div>
+</div>
   )
 }
 

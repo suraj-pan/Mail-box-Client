@@ -7,12 +7,14 @@ import { useNavigate } from 'react-router-dom';
 import { convertToRaw } from 'draft-js';
 import { convertToHTML} from 'draft-convert';
 import {sentMail} from '../store/Mail';
+import { IoMdSend } from "react-icons/io";
+
 
 const Compose = () => {
 
     const mail = useRef();
     const subject = useRef();
-    const text = useRef();
+    const text = useRef();                                                      
     const dispatch = useDispatch();
 
     const userEmail = useSelector((state)=>state.auth.email)
@@ -33,7 +35,7 @@ const Compose = () => {
         console.log(content)
          const emailPart = email.split("@")[0];
         // console.log(emailPart);
-        const response = await fetch(`https://expense-tracker-65763-default-rtdb.firebaseio.com/mailBox/${userEmail}.json`, {
+        const response = await fetch(`https://expense-tracker-65763-default-rtdb.firebaseio.com/mailBox/${userEmail}/sentBox.json`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -43,6 +45,7 @@ const Compose = () => {
             email: email,
             subject: subject,
             data: content,
+           
   
           })
   
@@ -50,7 +53,7 @@ const Compose = () => {
         })
   
         const data = await response.json();
-        // console.log(data)
+        console.log(data)
         console.log("sent mail jo bhejna hai",email,subject,content)
         dispatch(sentMail({email,subject,content}))
   
@@ -65,7 +68,7 @@ const Compose = () => {
             email:`${ userEmail}@gmail.com`,
             subject: subject,
             data: content,
-  
+            read:false
           })
   
         })
@@ -98,33 +101,46 @@ const Compose = () => {
 
 
   return (
-    <div>
-           Welcome to the Mail client box
+  
+        
 
-<div className='flex justify-center items-center mt-11 bg-slate-300 rounded-md py-3'>
-
-  <form onSubmit={submitHandler} >
-    <label className='flex'>
-      To:
-      <input type='email' ref={mail} className='w-full px-2  border-b border-black' placeholder='Enter the email' />
-    </label>
-    <label className='flex'>
-
-      <input type='text' ref={subject} className='w-full px-2 border-b border-black' placeholder=' subject' />
-    </label>
-    <Editor
-       editorState={editorState}
-      onEditorStateChange={setEditorState}
-
-      toolbarClassName="toolbarClassName"
-      wrapperClassName="wrapperClassName"
-      editorClassName="editorClassName border border-black bg-white"
-
-    />
-    <button className='bg-red-100 px-2 py-1 rounded-md mt-2' >submit</button>
-  </form>
-</div>
-    </div>
+        <div className="flex justify-center items-center h-screen  rounded-md py-8">
+            <form onSubmit={submitHandler} className="bg-blue-500 w-full max-w-2xl p-4 rounded-md">
+                <div className="mb-4">
+                    <label htmlFor="email" className="text-white block mb-1">To:</label>
+                    <input
+                        type="email"
+                        id="email"
+                        ref={mail}
+                        className="w-full px-3 py-2 rounded-md border border-black focus:outline-none focus:border-blue-700"
+                        placeholder="Enter the email"
+                    />
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="subject" className="text-white block mb-1">Subject:</label>
+                    <input
+                        type="text"
+                        id="subject"
+                        ref={subject}
+                        className="w-full px-3 py-2 rounded-md border border-black focus:outline-none focus:border-blue-700"
+                        placeholder="Enter subject"
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="text-white block mb-1">Message:</label>
+                    <Editor
+                        editorState={editorState}
+                        onEditorStateChange={setEditorState}
+                        toolbarClassName="toolbarClassName"
+                        wrapperClassName="wrapperClassName"
+                        editorClassName="editorClassName border border-black bg-white rounded-md"
+                    />
+                </div>
+                <button type="submit" className="bg-red-100 text-red-700 px-4 py-2 flex items-center rounded-md">
+                    Send <IoMdSend className="ml-1" />
+                </button>
+            </form>
+        </div>
   )
 }
 

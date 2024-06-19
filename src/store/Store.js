@@ -3,7 +3,9 @@ import AuthReducer from './Auth'
 import MailReducer from './Mail'
 
 export const Store = configureStore({
-   reducer:{ auth:AuthReducer,
-      mail:MailReducer},
+   reducer: {
+      auth: AuthReducer,
+      mail: MailReducer
+   },
 
 })
