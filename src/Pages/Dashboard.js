@@ -56,10 +56,14 @@ const Dashboard = () => {
 
   }
 
-  useEffect(() => {
+   useEffect(() => {
     getEmailData()
 
+
     const intervalId = setInterval(getEmailData, 6000);
+
+   
+
 
     // Clean up function to clear the interval when component unmounts
     return () => clearInterval(intervalId)
